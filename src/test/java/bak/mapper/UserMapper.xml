@@ -1,0 +1,31 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--&lt;!&ndash;<beans xmlns="http://www.springframework.org/schema/beans"&ndash;&gt;-->
+<!--&lt;!&ndash;       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&ndash;&gt;-->
+<!--&lt;!&ndash;       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">&ndash;&gt;-->
+<!--&lt;!&ndash;</beans>&ndash;&gt;-->
+<!--&lt;!&ndash;<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">&ndash;&gt;-->
+<!--&lt;!&ndash;    <constructor-arg index="0" ref="sqlSessionFactory" />&ndash;&gt;-->
+<!--&lt;!&ndash;    <property name="dataSource" ref="dataSource" />&ndash;&gt;-->
+<!--&lt;!&ndash;    <property name="configLocation" value="classpath:mybatis-config.xml" />&ndash;&gt;-->
+<!--&lt;!&ndash;    <property name="mapperLocations" value="classpath:com.example.demo.mapper.UserMapper" />&ndash;&gt;-->
+<!--&lt;!&ndash;</bean>&ndash;&gt;-->
+<!--<mappers>-->
+<!--    <mapper class="com.example.demo.mapper.UserMapper" />-->
+<!--</mappers>-->
+<!--        &lt;!&ndash;<!DOCTYPE mapper&ndash;&gt;-->
+<!--&lt;!&ndash;        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"&ndash;&gt;-->
+<!--&lt;!&ndash;        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">&ndash;&gt;-->
+
+<!--&lt;!&ndash;<mapper namespace="com.example.demo.mapper.UserMapper">&ndash;&gt;-->
+<!--&lt;!&ndash;    <resultMap id="BaseResultMap" type="com.example.demo.mapper.UserMapper">&ndash;&gt;-->
+<!--&lt;!&ndash;        <id property="Sno" column="Sno" jdbcType="CHAR"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <result property="Sname" column="Sname" jdbcType="CHAR"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <result property="Ssex" column="Ssex" jdbcType="ENUM"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <result property="Sage" column="Sage" jdbcType="SMALLINT"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <result property="Monitor" column="Monitor" jdbcType="CHAR"/>&ndash;&gt;-->
+<!--&lt;!&ndash;    </resultMap>&ndash;&gt;-->
+<!--&lt;!&ndash;    <sql id="Base_Column_List">&ndash;&gt;-->
+<!--&lt;!&ndash;        Sno,Sname,Ssex,Sage,Monitor&ndash;&gt;-->
+<!--&lt;!&ndash;    </sql>&ndash;&gt;-->
+<!--&lt;!&ndash;    &ndash;&gt;-->
+<!--&lt;!&ndash;</mapper>&ndash;&gt;-->

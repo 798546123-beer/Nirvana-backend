@@ -1,0 +1,33 @@
+#file: noinspection SpringBootApplicationYaml
+server:
+  port: 9090
+spring:
+  #  main:
+  #    allow-circular-references:false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 217158
+    username: root
+    url: jdbc:mysql://localhost:3306/mytest?characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+
+#  sql:
+#    init:
+#      data-locations: com.example.demo.mapper
+
+mybatis-plus:
+  # typeAliasesPackage: com.example.demo.Entity
+  #  mapper-locations: classpath*:com.example.demo.mapper
+#  type-aliases-package: com.example.demo.Entity
+  type-aliases-package: com/example/demo/Entity
+
+  #  mapper-locations: classpath*:/mapper/*.xml
+  #  mapper-locations: classpath*:/mapper/**/*.xml
+#  configuration:
+    # MyBatis 配置
+#    map-underscore-to-camel-case: true
+  global-config:
+    # 全局配置
+    db-config:
+      # 数据库配置
+      id-type: auto
+
