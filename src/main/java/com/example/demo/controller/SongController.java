@@ -1,10 +1,15 @@
 package com.example.demo.controller;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.demo.Entity.ResponseResult;
 import com.example.demo.Entity.Song;
+import com.example.demo.Entity.User;
 import com.example.demo.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.smartcardio.ResponseAPDU;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,6 +30,16 @@ public class SongController {
             songService.getBaseMapper().insert(new Song(song));
             return ResponseResult.okResult(200, "inserted");
         }catch(Exception e){
+            System.out.println(e);
+            return ResponseResult.errorResult(500, "error");
+        }
+    }
+    @PostMapping("/delete")
+    public ResponseResult delete(@RequestParam String songId){
+        try{
+            songService.getBaseMapper().delete(new QueryWrapper<Song>().eq("songId", songId));
+            return ResponseResult.okResult(200, "deleted");
+        }catch (Exception e) {
             System.out.println(e);
             return ResponseResult.errorResult(500, "error");
         }
