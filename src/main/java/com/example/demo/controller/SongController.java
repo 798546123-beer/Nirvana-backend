@@ -34,8 +34,16 @@ public class SongController {
             return ResponseResult.errorResult(500, "error");
         }
     }
+    public String selectBySongId(String songId) {
+        Song song = songService.getBaseMapper().selectOne(new QueryWrapper<Song>().eq("songId", songId));
+        if (song == null) return null;
+        return song.toString();
+    }
     @PostMapping("/delete")
     public ResponseResult delete(@RequestParam String songId){
+        if ((selectBySongId(songId) == null)) {
+            return ResponseResult.errorResult(404, "song not found");
+        }
         try{
             songService.getBaseMapper().delete(new QueryWrapper<Song>().eq("songId", songId));
             return ResponseResult.okResult(200, "deleted");
