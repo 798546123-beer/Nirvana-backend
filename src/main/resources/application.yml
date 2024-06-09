@@ -1,14 +1,16 @@
 #file: noinspection SpringBootApplicationYaml
 server:
-  port: 9090
+  port: 9513
 spring:
   #  main:
   #    allow-circular-references:false
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    password: 217158
-    username: root
-    url: jdbc:mysql://localhost:3306/mytest?characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    password:
+    username: avnadmin
+    url: jdbc:mysql://mysql-nirvana01-project-nirvana.d.aivencloud.com:12074/nirvana01?characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=true&requireSSL=true&verifyServerCertificate=true&trustCertificateKeyStoreUrl=file:src/main/resources/keystore.jks&trustCertificateKeyStorePassword=nirvanaSQLpw01
+
+#    url: jdbc:mysql://localhost:3306/mytest?characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
 
 #  sql:
 #    init:

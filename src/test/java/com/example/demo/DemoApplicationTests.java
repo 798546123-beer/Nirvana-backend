@@ -12,7 +12,7 @@ class DemoApplicationTests {
 private UserMapper userMapper;
 	@Test
 	void contextLoads() {
-		System.out.println(userMapper.selectById(2).toString());
+//		System.out.println(userMapper.selectById(2).toString());
 	}
 
 }
