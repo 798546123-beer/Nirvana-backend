@@ -9,7 +9,8 @@ import com.example.demo.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.smartcardio.ResponseAPDU;
+//import javax.smartcardio.ResponseAPDU;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -52,5 +53,28 @@ public class SongController {
             return ResponseResult.errorResult(500, "error");
         }
     }
+    public List<Song> selectList(){
+        try{
+            List<Song> songList = songService.getBaseMapper().selectList(null);
+            return songList;
+        }catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+    @GetMapping("/selectAll")
+    public ResponseResult selectAll(){
+        List<Song> songList = selectList();
+        if(songList!=null){
+            return new ResponseResult(200, "查询成功",songList);
+        }else{
+            return ResponseResult.errorResult(500, "未找到");
+        }
+    }
+
+//    @GetMapping("/selectByTags")
+//    public ResponseResult selectByTags(){
+//
+//    }
 
 }
