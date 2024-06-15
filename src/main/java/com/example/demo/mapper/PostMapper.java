@@ -1,17 +1,17 @@
 package com.example.demo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.demo.Entity.Song;
+import com.example.demo.Entity.Post;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
  * Created with IntelliJ IDEA.
  *
- * @Author: zoey
+ * @Author: annal
  * \\_/__/
- * @Date: 2024/06/07/12:34
+ * @Date: 2024/6/15
  * @Description:
  */
 @Mapper
-public interface SongMapper extends BaseMapper<Song> {
+public interface PostMapper extends BaseMapper<Post> {
 }
