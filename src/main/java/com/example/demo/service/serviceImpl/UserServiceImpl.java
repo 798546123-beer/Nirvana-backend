@@ -61,7 +61,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 //    }
 //
 //    @Override
-//    public List<User> selectList(Wrapper<User> queryWrapper) {
+//    public List<User> selectAll(Wrapper<User> queryWrapper) {
 //        return null;
 //    }
 //
