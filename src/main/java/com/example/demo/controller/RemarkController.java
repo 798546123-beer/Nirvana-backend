@@ -54,7 +54,7 @@ public class RemarkController {
     }
 
     @PostMapping("/add")
-    public ResponseResult add(Remark remark){
+    public ResponseResult add(@RequestBody Remark remark){
         try{
             remarkService.getBaseMapper().insert(new Remark(remark));
             return ResponseResult.okResult(200,"评论成功");

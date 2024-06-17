@@ -76,4 +76,34 @@ public class UserController {
             }
         }
     }
+    public Boolean minusCaresNumber(String caresId){
+        User users=userService.getBaseMapper().selectOne(new QueryWrapper<User>().eq("userId",caresId));
+        if(users==null){
+            return false;
+        }else {
+            try{
+                users.setCares(users.getCares()-1);
+                userService.getBaseMapper().updateById(users);
+                return true;
+            }catch (Exception e){
+                System.out.println(e);
+                return false;
+            }
+        }
+    }
+    public Boolean minusFollowsNumber(String followsId){
+        User users=userService.getBaseMapper().selectOne(new QueryWrapper<User>().eq("userId",followsId));
+        if(users==null){
+            return false;
+        }else {
+            try{
+                users.setFollows(users.getFollows()-1);
+                userService.getBaseMapper().updateById(users);
+                return true;
+            }catch (Exception e){
+                System.out.println(e);
+                return false;
+            }
+        }
+    }
 }

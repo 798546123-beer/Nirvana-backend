@@ -38,6 +38,6 @@ public class Remark {
         this.remarkTime = remark.remarkTime;
         this.userId = remark.userId;
         this.content = remark.content;
-        this.likes = remark.likes;
+        this.likes = 0;
     }
 }
