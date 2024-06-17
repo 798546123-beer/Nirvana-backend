@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.demo.Entity.ResponseResult;
 import com.example.demo.Entity.Song;
 import com.example.demo.service.SongService;
+import com.example.demo.service.serviceImpl.SongServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ import java.util.List;
 @RequestMapping("/song")
 public class SongController {
     @Autowired
-    private SongService songService;
+    private SongServiceImpl songService;
 
     @PostMapping("/upload")
     public ResponseResult add(@RequestBody Song song) {
