@@ -30,8 +30,17 @@ public class Post {
     String publishDate;
     @TableField(value="status")
     String status;
-    @TableField(value="like")
-    Integer like;
+    @TableField(value="likes")
+    Integer likes;
     @TableField(value="courseId")
     String courseId;
+    public Post(Post post) {
+//        this.postId = post.postId;
+        this.autherId = post.autherId;
+        this.content = post.content;
+        this.publishDate = post.publishDate;
+        this.status ="Pending";
+        this.likes = 0;
+        this.courseId = post.courseId;
+    }
 }

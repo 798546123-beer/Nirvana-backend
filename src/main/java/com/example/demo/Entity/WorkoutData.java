@@ -1,5 +1,6 @@
 package com.example.demo.Entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -21,7 +22,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @TableName(value="workoutdata")
 public class WorkoutData {
-    @TableId(value = "workoutId")
+    @TableId(value = "workoutId",type = IdType.AUTO)
     String workoutId;
     @TableField(value = "userId")
     String userId;

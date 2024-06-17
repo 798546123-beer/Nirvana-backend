@@ -1,5 +1,6 @@
 package com.example.demo.Entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @TableName(value = "user")
 public class User {
-    @TableId(value = "userId")
+    @TableId(value = "userId",type= IdType.AUTO)
     private String userId;
     @TableField(value = "username")
     private String username;
