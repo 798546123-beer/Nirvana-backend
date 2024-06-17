@@ -33,4 +33,11 @@ public class Remark {
     private String content;
     @TableField(value = "likes")
     private Integer likes;
+    public Remark(Remark remark) {
+        this.courseId = remark.courseId;
+        this.remarkTime = remark.remarkTime;
+        this.userId = remark.userId;
+        this.content = remark.content;
+        this.likes = remark.likes;
+    }
 }

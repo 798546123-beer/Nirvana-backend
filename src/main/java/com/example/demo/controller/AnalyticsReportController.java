@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/analysticsreport")
-public class AnalyticsReportController {
+public class AnalyticsReportController{
     @Autowired
     private AnalyticsReportServiceImpl analyticsReportService;
 }

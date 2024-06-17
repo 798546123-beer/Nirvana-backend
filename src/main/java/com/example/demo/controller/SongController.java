@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.demo.Entity.ResponseResult;
 import com.example.demo.Entity.Song;
 import com.example.demo.service.SongService;
-import com.example.demo.service.serviceImpl.SongServiceImpl;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +23,7 @@ import java.util.List;
 @RequestMapping("/song")
 public class SongController {
     @Autowired
-    private SongServiceImpl songService;
+    private SongService songService;
 
     @PostMapping("/upload")
     public ResponseResult add(@RequestBody Song song) {
@@ -88,11 +88,26 @@ public class SongController {
 
 
     @GetMapping("/selectByTags")
-    public ResponseResult findByTag(String tag) {
+    public ResponseResult findByTag(@RequestParam String tag) {
         List<Song> songList = selectByTag(tag);
         if (songList == null)
             return new ResponseResult(500, "没有对应的歌曲!");
-        else return new ResponseResult(200,"查询成功",songList);
+        else return new ResponseResult(200, "查询成功", songList);
+    }
+
+    @ApiOperation(value = "模糊查找歌曲")
+    @GetMapping("/selectByFuzzy")
+    public ResponseResult findByFuzzy(@RequestParam String word) {
+        try {
+            List<Song> songList = songService.getBaseMapper().selectList(new QueryWrapper<Song>().like("title", word));
+            System.out.println(songList.toString());
+            if(songList.toString()!="[]"){
+                return new ResponseResult(200,"查询成功",songList);
+            }else return ResponseResult.errorResult(500,"没有类似的歌曲!");
+        } catch (Exception e) {
+            System.out.println(e);
+            return  new ResponseResult().error(500,e.toString());
+        }
     }
 
 }
