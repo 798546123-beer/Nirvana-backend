@@ -1,16 +1,13 @@
 package com.example.demo.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.demo.Entity.ResponseResult;
 import com.example.demo.Entity.Song;
-import com.example.demo.Entity.User;
 import com.example.demo.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 
 
 /**
@@ -26,56 +23,75 @@ import java.util.List;
 public class SongController {
     @Autowired
     private SongService songService;
+
     @PostMapping("/upload")
     public ResponseResult add(@RequestBody Song song) {
         try {
             songService.getBaseMapper().insert(new Song(song));
             return ResponseResult.okResult(200, "inserted");
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             return ResponseResult.errorResult(500, "error");
         }
     }
+
     public String selectBySongId(String songId) {
         Song song = songService.getBaseMapper().selectOne(new QueryWrapper<Song>().eq("songId", songId));
         if (song == null) return null;
         return song.toString();
     }
+
     @PostMapping("/delete")
-    public ResponseResult delete(@RequestParam String songId){
+    public ResponseResult delete(@RequestParam String songId) {
         if ((selectBySongId(songId) == null)) {
             return ResponseResult.errorResult(404, "song not found");
         }
-        try{
+        try {
             songService.getBaseMapper().delete(new QueryWrapper<Song>().eq("songId", songId));
             return ResponseResult.okResult(200, "deleted");
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
             return ResponseResult.errorResult(500, "error");
         }
     }
-    public List<Song> selectList(){
-        try{
+
+    public List<Song> selectAll() {
+        try {
             List<Song> songList = songService.getBaseMapper().selectList(null);
             return songList;
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
             return null;
         }
     }
+
     @GetMapping("/selectAll")
-    public ResponseResult selectAll(){
-        List<Song> songList = selectList();
-        if(songList!=null){
-            return new ResponseResult(200, "查询成功",songList);
-        }else{
+    public ResponseResult findAll() {
+        List<Song> songList = selectAll();
+        if (songList != null) {
+            return new ResponseResult(200, "查询成功", songList);
+        } else {
             return ResponseResult.errorResult(500, "未找到");
         }
     }
 
-//    @GetMapping("/selectByTags")
-//    public ResponseResult selectByTags(){
-//
-//    }
+    public List<Song> selectByTag(String tag) {
+        try {
+            List<Song> songList = songService.getBaseMapper().selectList(new QueryWrapper<Song>().like("tags", tag));
+            return songList;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+
+    @GetMapping("/selectByTags")
+    public ResponseResult findByTag(String tag) {
+        List<Song> songList = selectByTag(tag);
+        if (songList == null)
+            return new ResponseResult(500, "没有对应的歌曲!");
+        else return new ResponseResult(200,"查询成功",songList);
+    }
 
 }
