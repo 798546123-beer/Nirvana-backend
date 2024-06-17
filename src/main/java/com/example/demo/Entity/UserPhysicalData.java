@@ -28,4 +28,10 @@ public class UserPhysicalData {
     float weight;
     @TableField(value = "age")
     int age;
+    public UserPhysicalData(UserPhysicalData userPhysicalData) {
+        this.userId = userPhysicalData.userId;
+        this.height = userPhysicalData.height;
+        this.weight = userPhysicalData.weight;
+        this.age = userPhysicalData.age;
+    }
 }

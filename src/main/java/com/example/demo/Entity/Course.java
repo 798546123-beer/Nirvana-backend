@@ -27,19 +27,21 @@ public class Course {
     @TableField(value = "description")
     String description;
     @TableField(value = "coachId")
-    String coachId;
+    int coachId;
     @TableField(value = "difficultyLevel")
     String difficultyLevel;
     @TableField(value = "duration")
-    String duration;
+    int duration;
     @TableField(value = "category")
     String category;
     @TableField(value = "tags")
     String tags;
     @TableField(value = "rating")
-    String rating;
+    float rating;
     @TableField(value = "previewAvailable")
-    String previewAvailable;
+    int previewAvailable;
+    @TableField(value = "url")
+    String url;
     public Course(Course course) {
         this.courseId = course.courseId;
         this.title = course.title;
@@ -51,5 +53,6 @@ public class Course {
         this.tags = course.tags;
         this.rating = course.rating;
         this.previewAvailable = course.previewAvailable;
+        this.url = course.url;
     }
 }
