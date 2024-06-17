@@ -38,10 +38,11 @@ public class CourseController {
         if(course==null) return null;
         return course.toString();
     }
+
     @PostMapping("/delete")
     public ResponseResult delete(@RequestParam String courseId){
         if(selectByCourseId(courseId)==null){
-            return ResponseResult.errorResult(500,"课程不存在");
+            return ResponseResult.errorResult(404,"课程不存在");
         }
         try{
             courseService.getBaseMapper().delete(new QueryWrapper<Course>().eq("courseId",courseId));
@@ -69,7 +70,7 @@ public class CourseController {
                 return new ResponseResult(500,"课程未找到");
             }
     }
-
+//按标签查询
     public List<Course> selectByTag(String tag){
         try{
             List<Course> courses = courseService.getBaseMapper().selectList(new QueryWrapper<Course>().like("tags",tag));
@@ -88,5 +89,23 @@ public class CourseController {
             return new ResponseResult(500,"课程未找到");
         }
     }
-
+//按课程名查询
+    public List<Course> selectByTitle(String title){
+        try{
+            List<Course> courses = courseService.getBaseMapper().selectList(new QueryWrapper<Course>().like("title",title));
+            return courses;
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+    @GetMapping("/selectByTitle")
+    public ResponseResult findByTitle(String title){
+        List<Course> courses = selectByTitle(title);
+        if(courses!=null){
+            return new ResponseResult(200,"查询成功",courses);
+        }else{
+            return new ResponseResult(500,"课程未找到");
+        }
+    }
 }
