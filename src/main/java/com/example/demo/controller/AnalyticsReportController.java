@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.service.AnalyticsReportService;
+import com.example.demo.service.serviceImpl.AnalyticsReportServiceImpl;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/analysticsreport")
 public class AnalyticsReportController {
     @Autowired
-    private AnalyticsReportService analyticsReportService;
+    private AnalyticsReportServiceImpl analyticsReportService;
 }

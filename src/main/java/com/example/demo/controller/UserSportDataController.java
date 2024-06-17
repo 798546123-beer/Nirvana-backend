@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.Entity.UserSportData;
 import com.example.demo.service.UserSportDataService;
+import com.example.demo.service.serviceImpl.UserSportDataServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,5 +19,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/usersportdata")
 public class UserSportDataController {
     @Autowired
-    private UserSportDataService userSportDataService;
+    private UserSportDataServiceImpl userSportDataService;
 }

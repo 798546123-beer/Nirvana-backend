@@ -40,4 +40,16 @@ public class Course {
     String rating;
     @TableField(value = "previewAvailable")
     String previewAvailable;
+    public Course(Course course) {
+        this.courseId = course.courseId;
+        this.title = course.title;
+        this.description = course.description;
+        this.coachId = course.coachId;
+        this.difficultyLevel = course.difficultyLevel;
+        this.duration = course.duration;
+        this.category = course.category;
+        this.tags = course.tags;
+        this.rating = course.rating;
+        this.previewAvailable = course.previewAvailable;
+    }
 }
