@@ -15,10 +15,6 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     @Autowired
     UserMapper userMapper;
-
-    public void addUser(String userId, String username, String password, String email, String gender, String userType, Integer follows, Integer cares) {
-        userMapper.insert(new User(userId, username, password, email, gender, userType, follows, cares));
-    }
 //    @Override
 //    public User selectBySno(String Sno) {
 //        return userMapper.selectById(new QueryWrapper<User>().eq("Sno", Sno));
