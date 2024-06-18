@@ -38,6 +38,15 @@ public class User {
     private Integer follows;
     @TableField(value = "cares")
     private Integer cares;
+    public User(User user){
+        this.username=user.username;
+        this.password=user.password;
+        this.email=user.email;
+        this.gender=user.gender;
+        this.userType=user.userType;
+        this.follows=0;
+        this.cares=0;
+    }
 //public String toString(){
 //    if(this.userId==null)
 //       return null;

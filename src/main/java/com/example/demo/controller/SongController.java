@@ -86,7 +86,7 @@ public class SongController {
         }
     }
 
-
+    @CrossOrigin()
     @GetMapping("/selectByTags")
     public ResponseResult findByTag(@RequestParam String tag) {
         List<Song> songList = selectByTag(tag);
@@ -96,6 +96,7 @@ public class SongController {
     }
 
     @ApiOperation(value = "模糊查找歌曲")
+    @CrossOrigin
     @GetMapping("/selectByFuzzy")
     public ResponseResult findByFuzzy(@RequestParam String word) {
         try {
