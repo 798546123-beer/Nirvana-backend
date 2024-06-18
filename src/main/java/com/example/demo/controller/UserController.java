@@ -37,7 +37,7 @@ public class UserController {
             return ResponseResult.errorResult(501, "already existed");
         }
         try {
-            userService.getBaseMapper().insert(user);
+            userService.getBaseMapper().insert(new User(user));
             return ResponseResult.okResult(200, "inserted");
         } catch (Exception e) {
             System.out.println(e);

@@ -7,7 +7,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: avnadmin
-    url: jdbc:mysql://mysql-nirvana01-project-nirvana.d.aivencloud.com:12074/nirvana01?characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=true&requireSSL=true&verifyServerCertificate=true&trustCertificateKeyStoreUrl=file:src/main/resources/keystore.jks&trustCertificateKeyStorePassword=nirvanaSQLpw01
+    url: jdbc:mysql://avnadmin:AVNS_vq-J1_Zllm8GzMjp2tt@mysql-nirvana01-project-nirvana.d.aivencloud.com:12074/nirvana01?ssl-mode=REQUIRED
+#    &trustCertificateKeyStoreUrl=file:src/main/resources/keystore.jks&useSSL=true&verifyServerCertificate=true&trustCertificateKeyStorePassword=nirvanaSQLpw01
     password: "AVNS_vq-J1_Zllm8GzMjp2tt"
 
 #    url: jdbc:mysql://localhost:3306/mytest?characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false

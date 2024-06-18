@@ -38,11 +38,20 @@ public class CourseController {
         if(course==null) return null;
         return course.toString();
     }
+    @GetMapping("/findByCourseId")
+    public ResponseResult findByCourseId(String courseId){
+        String selectByCourseId = selectByCourseId(courseId);
+        if(selectByCourseId==null){
+            return ResponseResult.errorResult(500,"课程不存在");
+        }
+        return ResponseResult.okResult(200,"查询成功",selectByCourseId);
+    }
+
 
     @PostMapping("/delete")
     public ResponseResult delete(@RequestParam String courseId){
         if(selectByCourseId(courseId)==null){
-            return ResponseResult.errorResult(404,"课程不存在");
+            return ResponseResult.errorResult(500,"课程不存在");
         }
         try{
             courseService.getBaseMapper().delete(new QueryWrapper<Course>().eq("courseId",courseId));
@@ -89,6 +98,7 @@ public class CourseController {
             return new ResponseResult(500,"课程未找到");
         }
     }
+
 //按课程名查询
     public List<Course> selectByTitle(String title){
         try{

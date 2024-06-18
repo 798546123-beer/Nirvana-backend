@@ -7,9 +7,7 @@ import com.example.demo.service.serviceImpl.PostServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,7 +31,9 @@ public class PostController {
     @GetMapping("/recentPost")
     public ResponseResult selectRecentPost() {
         try {
-            List<Post> postList=postService.getBaseMapper().selectList(new QueryWrapper<Post>().eq("status","Published").orderBy(true, true, "publishDate").last("limit 10"));
+
+            List<Post> postList=postService.getBaseMapper().selectList(new QueryWrapper<Post>().eq("status","Published").orderBy(true, false, "publishDate").last("limit 10"));
+
             if(postList.toString()!="[]"){
                 return new ResponseResult<>(200,"查询成功",postList);
             }
@@ -42,6 +42,30 @@ public class PostController {
             System.out.println(e);
             return new ResponseResult<>().error(500,e.toString());
         }
+    }
+    @ApiOperation(value = "新增post")
+    @PostMapping("/addPost")
+    public ResponseResult addPost(@RequestBody Post post) {
+        try {
+            postService.getBaseMapper().insert(new Post(post));
+            return ResponseResult.okResult(200,"新增成功");
+        } catch (Exception e) {
+            System.out.println(e);
+            return new ResponseResult<>().error(500,e.toString());
+        }
+
+    }
+    @ApiOperation(value = "删除post")
+    @PostMapping("/deletePost")
+    public ResponseResult deletePost(String postId) {
+        try {
+            postService.getBaseMapper().deleteById(postId);
+            return ResponseResult.okResult(200,"删除成功");
+        } catch (Exception e) {
+            System.out.println(e);
+            return new ResponseResult<>().error(500,e.toString());
+        }
+
     }
 
 }
