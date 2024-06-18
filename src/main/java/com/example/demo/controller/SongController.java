@@ -42,6 +42,12 @@ public class SongController {
         return song.toString();
     }
 
+    @GetMapping("/selectBySongId")
+    public ResponseResult findBySongId(@RequestParam String songId) {
+        Song song=songService.getBaseMapper().selectOne(new QueryWrapper<Song>().eq("songId",songId));
+        return song == null ? (new ResponseResult(500, "没有找到对应的歌曲")) : (new ResponseResult<>(200, "查找成功", song));
+    }
+
     @PostMapping("/delete")
     public ResponseResult delete(@RequestParam String songId) {
         if ((selectBySongId(songId) == null)) {
@@ -86,7 +92,6 @@ public class SongController {
         }
     }
 
-    @CrossOrigin()
     @GetMapping("/selectByTags")
     public ResponseResult findByTag(@RequestParam String tag) {
         List<Song> songList = selectByTag(tag);
@@ -102,12 +107,12 @@ public class SongController {
         try {
             List<Song> songList = songService.getBaseMapper().selectList(new QueryWrapper<Song>().like("title", word));
             System.out.println(songList.toString());
-            if(songList.toString()!="[]"){
-                return new ResponseResult(200,"查询成功",songList);
-            }else return ResponseResult.errorResult(500,"没有类似的歌曲!");
+            if (songList.toString() != "[]") {
+                return new ResponseResult(200, "查询成功", songList);
+            } else return ResponseResult.errorResult(500, "没有类似的歌曲!");
         } catch (Exception e) {
             System.out.println(e);
-            return  new ResponseResult().error(500,e.toString());
+            return new ResponseResult().error(500, e.toString());
         }
     }
 
