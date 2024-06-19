@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -45,9 +46,10 @@ public class PostController {
     }
     @ApiOperation(value = "新增post")
     @PostMapping("/addPost")
-    public ResponseResult addPost(@RequestBody Post post) {
+    public ResponseResult addPost(@RequestBody Post post,@RequestParam("file") MultipartFile file) {
         try {
-            postService.getBaseMapper().insert(new Post(post));
+            Post temp=file.isEmpty()?(new Post(post)):(new Post(post,file));
+            postService.getBaseMapper().insert(temp);
             return ResponseResult.okResult(200,"新增成功");
         } catch (Exception e) {
             System.out.println(e);

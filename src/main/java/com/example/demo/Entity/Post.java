@@ -6,6 +6,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.sql.Blob;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,7 +27,7 @@ public class Post {
     @TableId(value = "postId")
     String postId;
     @TableField(value = "authorId")
-    String autherId;
+    String authorId;
     @TableField(value = "content")
     String content;
     @TableField(value = "publishDate")
@@ -34,13 +38,26 @@ public class Post {
     Integer likes;
     @TableField(value="courseId")
     String courseId;
+    @TableField(value ="pictures")
+    byte[] picture;
     public Post(Post post) {
 //        this.postId = post.postId;
-        this.autherId = post.autherId;
+        this.authorId = post.authorId;
         this.content = post.content;
         this.publishDate = post.publishDate;
         this.status ="Pending";
         this.likes = 0;
         this.courseId = post.courseId;
+        this.picture= post.picture;
+    }
+    public Post(Post post, MultipartFile file) throws IOException{
+//        this.postId = post.postId;
+        this.authorId = post.authorId;
+        this.content = post.content;
+        this.publishDate = post.publishDate;
+        this.status ="Pending";
+        this.likes = 0;
+        this.courseId = post.courseId;
+        this.picture=file.getBytes();
     }
 }
