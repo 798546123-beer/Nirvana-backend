@@ -7,6 +7,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,4 +28,7 @@ public class Image {
     private Integer Id;
     @TableField(value = "pictures")
     private byte[] pictures;
+    public Image (MultipartFile file) throws IOException {
+        this.pictures= file.getBytes();
+    }
 }
