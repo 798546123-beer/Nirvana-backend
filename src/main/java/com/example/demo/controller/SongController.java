@@ -116,4 +116,19 @@ public class SongController {
         }
     }
 
+    @ApiOperation(value = "播放次数+1")
+    @CrossOrigin
+    @GetMapping("/addPlayCount")
+    public ResponseResult addPlayCount(@RequestParam String songId) {
+        try {
+            Song song = songService.getBaseMapper().selectOne(new QueryWrapper<Song>().eq("songId", songId));
+            song.setPlayCount(song.getPlayCount() + 1);
+            songService.getBaseMapper().update(song, new QueryWrapper<Song>().eq("songId", songId));
+            return ResponseResult.okResult(200, "播放次数+1");
+        } catch (Exception e) {
+            System.out.println(e);
+            return ResponseResult.errorResult(500, "更新失败");
+        }
+    }
+
 }
