@@ -36,7 +36,7 @@ public class ImageController {
     @PostMapping("/upload")
     public ResponseResult addPost(@RequestParam("file") MultipartFile file) {
         try {
-            imageService.getBaseMapper().insert(new Image(1, file.getBytes()));
+            imageService.getBaseMapper().insert(new Image(file));
             return ResponseResult.okResult(200,"新增成功");
         } catch (Exception e) {
             System.out.println(e);
