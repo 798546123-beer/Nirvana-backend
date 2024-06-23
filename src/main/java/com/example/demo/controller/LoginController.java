@@ -32,7 +32,7 @@ public class LoginController {
         if(!StringUtils.isEmpty(userId)&&password.equals(pw)){
             session.setAttribute("userId", userId);
 //            return "redirect:/index.html";
-            return ResponseResult.okResult(200,"登陆成功");
+            return new ResponseResult(200,"登陆成功",users);
         }
         else {
             map.put("msg","用户名或密码错误");
