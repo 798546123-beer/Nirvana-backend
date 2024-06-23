@@ -5,10 +5,11 @@ import com.example.demo.Entity.ResponseResult;
 import com.example.demo.Entity.Song;
 import com.example.demo.service.SongService;
 import io.swagger.annotations.ApiOperation;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -44,7 +45,7 @@ public class SongController {
 
     @GetMapping("/selectBySongId")
     public ResponseResult findBySongId(@RequestParam String songId) {
-        Song song=songService.getBaseMapper().selectOne(new QueryWrapper<Song>().eq("songId",songId));
+        Song song = songService.getBaseMapper().selectOne(new QueryWrapper<Song>().eq("songId", songId));
         return song == null ? (new ResponseResult(500, "没有找到对应的歌曲")) : (new ResponseResult<>(200, "查找成功", song));
     }
 
@@ -80,6 +81,23 @@ public class SongController {
         } else {
             return ResponseResult.errorResult(500, "未找到");
         }
+    }
+
+    @GetMapping("/recommend")
+    public ResponseResult recommend() {
+        @AllArgsConstructor
+        class byTag{
+            public String tag;
+            public List<Song> list;
+        }
+        List<byTag> list=new ArrayList<>();
+        List<String> tags = Arrays.asList("伤感", "节奏", "emo");//"流行"
+        tags.forEach(tag -> {
+            List<Song> songList = songService.getBaseMapper().selectList(new QueryWrapper<Song>().like("tags", tag));
+            list.add(new byTag(tag,songList));
+        });
+        //没加try catch
+        return new ResponseResult<>(200,"查询成功",list);
     }
 
     public List<Song> selectByTag(String tag) {
