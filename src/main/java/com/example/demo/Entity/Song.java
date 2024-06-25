@@ -8,6 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -38,6 +41,8 @@ public class Song {
         private String tags;
         @TableField(value = "playCount")
         private Integer playCount;
+        @TableField(value = "id")
+        private String id;
         public Song(Song song){
                 this.title=song.title;
                 this.artist=song.artist;
@@ -46,5 +51,15 @@ public class Song {
                 this.playCount=0;
                 this.url=song.url;
                 this.tags=song.tags;
+                this.id=getID(song.url);
+        }
+        public static String getID(String sourceUrl) {
+                String regex = "id=(\\d+$)";
+                Pattern pattern =  Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(sourceUrl);
+                if (matcher.find()) {
+                        return matcher.group(1);
+                }
+                return null;
         }
 }
