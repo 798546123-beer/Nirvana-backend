@@ -28,6 +28,7 @@ public class CourseController {
             courseService.getBaseMapper().insert(new Course(course));
             return ResponseResult.okResult(200,"上传成功");
         }catch (Exception e){
+            System.out.println(e);
             return ResponseResult.errorResult(500,"上传失败");
         }
 

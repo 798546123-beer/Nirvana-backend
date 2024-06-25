@@ -1,5 +1,6 @@
 package com.example.demo.Entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -22,7 +23,7 @@ import java.util.regex.Pattern;
 @NoArgsConstructor
 @TableName(value="course")
 public class Course {
-    @TableId(value = "courseId")
+    @TableId(value = "courseId",type = IdType.AUTO)
     String courseId;
     @TableField(value = "title")
     String title;
@@ -47,7 +48,6 @@ public class Course {
     @TableField(value = "bv")
     String bv;
     public Course(Course course) {
-        this.courseId = course.courseId;
         this.title = course.title;
         this.description = course.description;
         this.coachId = course.coachId;
@@ -67,7 +67,6 @@ public class Course {
         if (matcher.find()) {
             return matcher.group(1); // group(1) 返回第一个捕获组（即 bvid 的值）
         }
-
         return null;
     }
 
