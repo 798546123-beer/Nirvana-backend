@@ -7,6 +7,7 @@ import com.example.demo.service.SongService;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -25,11 +26,12 @@ import java.util.*;
 public class SongController {
     @Autowired
     private SongService songService;
-
+    @Transactional(rollbackFor = Exception.class)
     @PostMapping("/upload")
     public ResponseResult add(@RequestBody Song song) {
+
         try {
-            songService.getBaseMapper().insert(new Song(song));
+            songService.getBaseMapper().insert(new Song(song));//imgUrl还没加
             return ResponseResult.okResult(200, "inserted");
         } catch (Exception e) {
             System.out.println(e);

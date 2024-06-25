@@ -43,6 +43,9 @@ public class Song {
         private Integer playCount;
         @TableField(value = "id")
         private String id;
+        @TableField(value = "imgUrl")
+        private String imgUrl;
+        //在上传那边加个事务处理
         public Song(Song song){
                 this.title=song.title;
                 this.artist=song.artist;
