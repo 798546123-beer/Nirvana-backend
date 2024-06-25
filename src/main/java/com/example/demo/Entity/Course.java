@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created with IntelliJ IDEA.
@@ -42,6 +44,8 @@ public class Course {
     int previewAvailable;
     @TableField(value = "url")
     String url;
+    @TableField(value = "bv")
+    String bv;
     public Course(Course course) {
         this.courseId = course.courseId;
         this.title = course.title;
@@ -54,5 +58,17 @@ public class Course {
         this.rating = course.rating;
         this.previewAvailable = course.previewAvailable;
         this.url = course.url;
+        this.bv =getBV(course.url);
     }
+    public static String getBV(String sourceUrl) {
+        String regex = "bvid=([^&]+)";
+        Pattern pattern =  Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(sourceUrl);
+        if (matcher.find()) {
+            return matcher.group(1); // group(1) 返回第一个捕获组（即 bvid 的值）
+        }
+
+        return null;
+    }
+
 }
