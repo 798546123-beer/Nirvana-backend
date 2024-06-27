@@ -4,9 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.demo.Entity.Course;
 import com.example.demo.Entity.ResponseResult;
 import com.example.demo.service.serviceImpl.CourseServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -41,11 +44,11 @@ public class CourseController {
     }
     @GetMapping("/findByCourseId")
     public ResponseResult findByCourseId(String courseId){
-        String selectByCourseId = selectByCourseId(courseId);
+        Course selectByCourseId = courseService.getBaseMapper().selectOne(new QueryWrapper<Course>().eq("courseId",courseId));
         if(selectByCourseId==null){
             return ResponseResult.errorResult(500,"课程不存在");
         }
-        return ResponseResult.okResult(200,"查询成功",selectByCourseId);
+        return  new ResponseResult(200,"查询成功",selectByCourseId);
     }
 
 
@@ -118,5 +121,21 @@ public class CourseController {
         }else{
             return new ResponseResult(500,"课程未找到");
         }
+    }
+    @GetMapping("/recommend")
+    public ResponseResult recommend(){
+        @AllArgsConstructor
+        class byTag{
+            public String tag;
+            public List<Course> list;
+        }
+        List<byTag> list=new ArrayList<>();
+        List<String> tags = Arrays.asList("瑜伽", "健身", "护理","按摩");
+        tags.forEach(tag -> {
+            List<Course> courseList = courseService.getBaseMapper().selectList(new QueryWrapper<Course>().like("tags", tag).last("limit 1"));
+            list.add(new byTag(tag,courseList));
+        });
+        //没加try catch
+        return new ResponseResult<>(200,"查询成功",list);
     }
 }
