@@ -86,14 +86,19 @@ public class SongController {
     }
 
     @GetMapping("/recommend")
-    public ResponseResult recommend() {
+    public ResponseResult recommend(@RequestParam String num) {
         @AllArgsConstructor
         class byTag{
             public String tag;
             public List<Song> list;
         }
         List<byTag> list=new ArrayList<>();
-        List<String> tags = Arrays.asList("伤感", "节奏", "emo");//"流行"
+        List<String> tags=null;
+        if(num.equals("1"))
+        tags = Arrays.asList("伤感", "节奏", "emo");//"流行"
+        else {
+        tags = Arrays.asList("燃", "h3r3", "温暖");
+        }
         tags.forEach(tag -> {
             List<Song> songList = songService.getBaseMapper().selectList(new QueryWrapper<Song>().like("tags", tag));
             list.add(new byTag(tag,songList));
