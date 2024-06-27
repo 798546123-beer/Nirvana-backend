@@ -94,10 +94,13 @@ public class SongController {
         }
         List<byTag> list=new ArrayList<>();
         List<String> tags=null;
+        System.out.println(num);
         if(num.equals("1"))
         tags = Arrays.asList("伤感", "节奏", "emo");//"流行"
-        else {
+        else if(num.equals("2")) {
         tags = Arrays.asList("燃", "h3r3", "温暖");
+        }else{
+        tags = Arrays.asList("流行", "伤感", "emo");
         }
         tags.forEach(tag -> {
             List<Song> songList = songService.getBaseMapper().selectList(new QueryWrapper<Song>().like("tags", tag));
